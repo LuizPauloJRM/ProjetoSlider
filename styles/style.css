@@ -18,34 +18,103 @@ header {
     grid-template-columns: 1fr 600px;
     gap: 45px;
     text-items: center;
-  & img{
+    z-index: 2;
+ 
+  }
+  
+header img {
     width: 250px;
     height: auto;
-  }
-  & nav {
-    & ul{
-        display: grid ;
-        grid-template-columns: repeat(3, 200px);
-    }
-  }
+}
+  header nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+}
+
+  
  section{
+   
     height: 100vh;
     position: relative;
-    & .list{
-        width: 70vw;
-        margin: auto;
-        height: 100%;
-        position: relative;
+
         
     }
     
- }
-.arrows{
-    & button{
-        & img{
-            width: 100px;
-        }
+section .list {
+    width: 70vw;
+    margin: auto;
+    height: 100%;
+    position: relative;
+}
+    section .list .item .Agente01 img {
+        width: 100%;
+        transform: rotate(-40deg);
     }
+    
+ 
+.arrows{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.arrows button img{
+            width: 20px;
+            height: 20px;
+     
+}
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    header img {
+        width: 200px;
+    }
+
+    header nav ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    section .list {
+        width: 90vw;
+    }
+
+    section .list .item .Agente01 {
+        width: 90%;
+    }
+
+    .arrows button img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header img {
+        width: 150px;
+    }
+
+    section .list {
+        width: 100vw;
+    }
+
+    .arrows button img {
+        width: 20px;
+        height: 20px;
+    }
+.content{
+    position: absolute;
+    right: 100px;
+   width: 70%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+    gap: 20px;
+    align-items:end
 }
 
 }
