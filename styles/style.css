@@ -75,16 +75,38 @@ section .list {
     height: 100%;
     margin: auto;
     position: relative;
+    overflow: hidden; /* Garante que os elementos fora do contêiner não sejam visíveis */
 }
 
 section .list .item {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 100%; /* Inicialmente fora da tela à direita */
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Invisível inicialmente */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
 }
 
-section .list .item .Agente01 img {
-    width: 100%;
-    height: auto;
-    transform: rotate(-30deg);
+section .list .item.active {
+    left: 0; /* Centraliza o item ativo */
+    opacity: 1; /* Torna visível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 1; /* Garante que o item ativo fique acima dos outros */
+}
+
+section .list .item.previous {
+    left: -100%; /* Move para fora da tela à esquerda */
+    opacity: 0; /* Invisível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 0; /* Garante que fique atrás do item ativo */
+}
+
+section .list .item.next {
+    left: 100%; /* Move para fora da tela à direita */
+    opacity: 0; /* Invisível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 0; /* Garante que fique atrás do item ativo */
 }
 
 /* Content */
@@ -97,22 +119,26 @@ section .list .item .Agente01 img {
     justify-content: end;
     align-items: end;
     gap: 20px;
+    opacity: 0;
+    transform: translateX(100px); /* Move para fora da tela à direita */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
 }
 
-.content .agente1-information {
-    font-weight: bold;
+section .list .item.active .content {
+    opacity: 1; /* Torna visível */
+    transform: translateX(0); /* Move para a posição original */
 }
 
-.content h2 {
-    font-size: 4em;
-    line-height: 1em;
+/* Imagens */
+section .list .item img {
+    opacity: 0;
+    transform: translateX(-100px); /* Move para fora da tela à esquerda */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
 }
 
-.descricao {
-    color: #cccccc;
-    font-size: 12px;
-    text-align: right;
-    max-width: 400px;
+section .list .item.active img {
+    opacity: 1; /* Torna visível */
+    transform: translateX(0); /* Move para a posição original */
 }
 
 /* Botão Saiba Mais */
@@ -134,6 +160,7 @@ section .list .item .Agente01 img {
     transform: scale(1.1);
 }
 
+/* Arrows */
 .arrows {
     position: absolute;
     width: 100%; /* Faz com que as setas ocupem toda a largura */
@@ -141,7 +168,7 @@ section .list .item .Agente01 img {
     transform: translateY(-50%); /* Ajusta para o centro exato */
     display: flex;
     justify-content: space-between; /* Posiciona as setas nos extremos */
-    z-index: 2; /* Garante que fique acima do conteúdo */
+    z-index: 3; /* Garante que fique acima do conteúdo */
     pointer-events: none; /* Permite que o clique passe apenas para os botões */
 }
 
@@ -169,39 +196,31 @@ section .list .item .Agente01 img {
 }
 
 .arrows button:first-child {
-    position: absolute;
-    left:-50px; /* Posiciona no canto esquerdo */
+    margin-left: 10px; /* Adiciona margem para afastar do canto esquerdo */
     transform: scaleX(-1); /* Inverte a seta horizontalmente */
 }
 
-
 .arrows button:last-child {
-    position: absolute;
-    right: -50px; /* Posiciona no canto direito */
+    margin-right: 10px; /* Adiciona margem para afastar do canto direito */
 }
-/* Indicators */
+
+/* Indicadores */
 .indicators {
     position: absolute;
-    display: flex;
-    width: 90vw;
-    height: 200px;
-    bottom: 20px;
+    bottom: 20px; /* Posiciona os indicadores na parte inferior */
     left: 50%;
-    top: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
     flex-direction: column;
-    justify-content: end;
-    gap: 15px;
+    align-items: center;
+    gap: 10px;
+    z-index: 3; /* Garante que os indicadores fiquem acima do conteúdo */
 }
 
 .indicators .number {
     font-size: 24px;
     font-weight: bold;
     color: #4a94e4;
-    margin-left: 10px;
-    align-self: flex-start;
 }
 
 .indicators ul {
@@ -213,42 +232,116 @@ section .list .item .Agente01 img {
 }
 
 .indicators ul li {
-    width: 10px;
-    height: 10px;
+    width: 12px; /* Aumenta o tamanho dos indicadores */
+    height: 12px;
     background-color: #ccc;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .indicators ul li.active {
     background-color: #007BFF;
+    transform: scale(1.2); /* Destaca o indicador ativo */
 }
 
 .indicators ul li:hover {
     background-color: #0056b3;
 }
 
- /* Inicialmente invisível */
-section .list .item .Agente01 {
-    opacity: 0;
-    transform: translateX(-100px); /* Move para fora da tela à esquerda */
+/* Setas */
+.arrows {
+    position: absolute;
+    width: 100%; /* Faz com que as setas ocupem toda a largura */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para o centro exato */
+    display: flex;
+    justify-content: space-between; /* Posiciona as setas nos extremos */
+    z-index: 3; /* Garante que fique acima do conteúdo */
+    pointer-events: none; /* Permite que o clique passe apenas para os botões */
+}
+
+.arrows button {
+    background-color: #007BFF;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    pointer-events: all; /* Permite clique apenas nos botões */
+}
+
+.arrows button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Aumenta o botão ao passar o mouse */
+}
+
+.arrows button img {
+    width: 20px;
+    height: 20px;
+}
+
+.arrows button:first-child {
+    margin-left: 10px; /* Adiciona margem para afastar do canto esquerdo */
+    transform: scaleX(-1); /* Inverte a seta horizontalmente */
+}
+
+.arrows button:last-child {
+    margin-right: 10px; /* Adiciona margem para afastar do canto direito */
+}
+
+/* Agentes */
+section .list .item {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Inicialmente fora da tela à direita */
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Invisível inicialmente */
     transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
 }
 
-section .list .item .content {
-    opacity: 0;
+section .list .item.active {
+    left: 0; /* Centraliza o item ativo */
+    opacity: 1; /* Torna visível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 1; /* Garante que o item ativo fique acima dos outros */
+}
+
+section .list .item.previous {
+    left: -100%; /* Move para fora da tela à esquerda */
+    opacity: 0; /* Invisível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 0; /* Garante que fique atrás do item ativo */
+}
+
+section .list .item.next {
+    left: 100%; /* Move para fora da tela à direita */
+    opacity: 0; /* Invisível */
+    transform: translateX(0); /* Remove qualquer deslocamento */
+    z-index: 0; /* Garante que fique atrás do item ativo */
+}
+
+/* Transições para o conteúdo */
+.content {
+    position: absolute;
+    right: 100px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    gap: 20px;
+    opacity: 0; /* Inicialmente invisível */
     transform: translateX(100px); /* Move para fora da tela à direita */
     transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
 }
 
-/* Quando a classe "active" é adicionada */
-section .list .item .Agente01.active {
-    opacity: 1;
-    transform: translateX(0); /* Volta para a posição original */
-}
-
-section .list .item .content.active {
-    opacity: 1;
-    transform: translateX(0); /* Volta para a posição original */
+section .list .item.active .content {
+    opacity: 1; /* Torna visível */
+    transform: translateX(0); /* Move para a posição original */
 }
