@@ -14,6 +14,7 @@ HTML5: Estrutura semântica e bem organizada.
 CSS3: Animações suaves e layout responsivo.
 JavaScript: Lógica para alternar entre os agentes e atualizar o conteúdo dinamicamente.
 📂 Estrutura do Projeto
+
 ProjetoSlider/
 ├── assets/                # Imagens e ícones do projeto
 ├── styles/
