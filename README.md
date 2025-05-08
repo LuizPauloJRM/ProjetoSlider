@@ -3,7 +3,7 @@ Estruturar o site com HTML , estilizando com css e JavaScript , designe responsi
 Manual do FPS - Slider Interativo
 Bem-vindo ao Manual do FPS, um projeto desenvolvido para oferecer uma experiência interativa e informativa para jogadores de jogos FPS. Este slider apresenta agentes, habilidades, dicas e até uma área de treinamento de tiro para aprimorar suas habilidades no jogo.
 
-🚀 Funcionalidades
+🚀 ##Funcionalidades
 Slider Interativo: Navegue entre os agentes com transições suaves e animadas.
 Exibição Sincronizada: Imagens, descrições e botões aparecem juntos de forma fluida.
 Setas e Indicadores: Facilite a navegação com controles intuitivos.
@@ -13,8 +13,8 @@ Skills e Dicas: Aprenda habilidades e estratégias para melhorar no jogo.
 HTML5: Estrutura semântica e bem organizada.
 CSS3: Animações suaves e layout responsivo.
 JavaScript: Lógica para alternar entre os agentes e atualizar o conteúdo dinamicamente.
-📂 Estrutura do Projeto
-
+📂 ##Estrutura do Projeto
+```bash
 ProjetoSlider/
 ├── assets/                # Imagens e ícones do projeto
 ├── styles/
@@ -22,8 +22,9 @@ ProjetoSlider/
 ├── js/
 │   └── script.js          # Lógica do slider
 ├── index.html             # Página principal
-└── README.md    
- Como Usar
+└── README.md
+```   
+##Como Usar
 Clone este repositório:
 git clone https://github.com/seu-usuario/ProjetoSlider.git
 Abra o arquivo index.html no navegador.
