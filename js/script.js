@@ -12,6 +12,13 @@ function updateAgent(index) {
     items.forEach((item, i) => {
         item.classList.remove('active', 'previous', 'next');
         indicators[i].classList.remove('active');
+
+        // Reseta o conteúdo (texto e botão) para invisível
+        const content = item.querySelector('.content');
+        if (content) {
+            content.style.opacity = '0';
+            content.style.transform = 'translateX(100px)';
+        }
     });
 
     // Define o agente atual como "active"
@@ -29,7 +36,7 @@ function updateAgent(index) {
     // Atualiza o número do indicador
     document.querySelector('.indicators .number').textContent = index + 1;
 
-    // Garante que o conteúdo (texto e botão) seja exibido corretamente
+    // Garante que o conteúdo (texto e botão) seja exibido junto com a imagem
     const activeContent = items[index].querySelector('.content');
     if (activeContent) {
         activeContent.style.opacity = '1';
