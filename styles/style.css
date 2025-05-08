@@ -228,3 +228,27 @@ section .list .item .Agente01 img {
 .indicators ul li:hover {
     background-color: #0056b3;
 }
+
+ /* Inicialmente invisível */
+section .list .item .Agente01 {
+    opacity: 0;
+    transform: translateX(-100px); /* Move para fora da tela à esquerda */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
+}
+
+section .list .item .content {
+    opacity: 0;
+    transform: translateX(100px); /* Move para fora da tela à direita */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transição suave */
+}
+
+/* Quando a classe "active" é adicionada */
+section .list .item .Agente01.active {
+    opacity: 1;
+    transform: translateX(0); /* Volta para a posição original */
+}
+
+section .list .item .content.active {
+    opacity: 1;
+    transform: translateX(0); /* Volta para a posição original */
+}
